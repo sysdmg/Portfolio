@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Palette Finder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Palette Finder</h1>
+        
+        <div class="upload-section">
+            <input type="file" id="imageUpload" accept="image/*">
+            <label for="imageUpload" class="upload-button">Choose an Image</label>
+        </div>
+
+        <div class="result-section" id="resultSection" style="display: none;">
+            <div class="original-image">
+                <h2>Original Image</h2>
+                <img id="originalImage" alt="Original image">
+            </div>
+            
+            <div class="palette-section">
+                <h2>Color Palette</h2>
+                <canvas id="paletteCanvas"></canvas>
+                <div id="colorCodes" class="color-codes"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

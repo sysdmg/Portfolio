@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Cat Photos</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            color: #e0e0e0;
+        }
+        
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #cat-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px 0;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+
+        #cat-image:hover {
+            filter: grayscale(50%);
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 18px;
+            color: #a0a0a0;
+        }
+
+        button {
+            background-color: #404040;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            background-color: #505050;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Cat Photos</h1>
+    <div class="container">
+        <div id="image-container">
+            <p class="loading">Loading cat photo...</p>
+        </div>
+        <button onclick="loadNewCat()">Show me another cat!</button>
+    </div>
+
+    <script>
+        async function loadNewCat() {
+            const imageContainer = document.getElementById('image-container');
+            imageContainer.innerHTML = '<p class="loading">Loading cat photo...</p>';
+            
+            try {
+                const response = await fetch('https://api.thecatapi.com/v1/images/search');
+                const data = await response.json();
+                
+                if (data && data[0] && data[0].url) {
+                    const img = document.createElement('img');
+                    img.id = 'cat-image';
+                    img.src = data[0].url;
+                    img.alt = 'Random cat photo';
+                    
+                    img.onload = () => {
+                        imageContainer.innerHTML = '';
+                        imageContainer.appendChild(img);
+                    };
+                } else {
+                    throw new Error('No cat image found');
+                }
+            } catch (error) {
+                imageContainer.innerHTML = '<p class="loading">Failed to load cat photo. Please try again!</p>';
+                console.error('Error loading cat photo:', error);
+            }
+        }
+
+        // Load a cat photo when the page loads
+        window.onload = loadNewCat;
+    </script>
+</body>
+</html>

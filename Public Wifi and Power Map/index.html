@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Work Cafe Finder</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Leaflet CSS for maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Remote Work Cafe Finder</h1>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search by location or cafe name">
+            <button id="search-btn">Search</button>
+        </div>
+        <div class="filters">
+            <label><input type="checkbox" id="wifi-filter" checked> Has Wifi</label>
+            <label><input type="checkbox" id="power-filter" checked> Has Power Outlets</label>
+        </div>
+    </header>
+
+    <main>
+        <div class="layout-container">
+            <div id="map"></div>
+            <div class="cafe-list">
+                <h2>Available Cafes</h2>
+                <div id="cafe-items"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Remote Work Cafe Finder</p>
+    </footer>
+
+    <!-- Leaflet JS for maps -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Writer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        #writing-area {
+            width: 80%;
+            height: 70vh;
+            padding: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+            background-color: #2a2a2a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            resize: none;
+            transition: opacity 2s ease;
+        }
+
+        #writing-area:focus {
+            outline: none;
+        }
+
+        .info {
+            margin-top: 20px;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ghost Writer</h1>
+    <textarea id="writing-area" placeholder="Start typing... If you stop for 10 seconds, your text will disappear..."></textarea>
+    <p class="info">Keep typing to keep your text visible!</p>
+
+    <script>
+        const textarea = document.getElementById('writing-area');
+        // Delay in milliseconds before text starts to disappear (10 seconds)
+        const TYPING_DELAY = 30000; 
+        let typingTimer;
+
+        function startDisappearTimer() {
+            clearTimeout(typingTimer);
+            textarea.style.opacity = '1';
+            
+            typingTimer = setTimeout(() => {
+                textarea.style.opacity = '0';
+            }, TYPING_DELAY);
+        }
+
+        textarea.addEventListener('input', startDisappearTimer);
+        textarea.addEventListener('focus', startDisappearTimer);
+    </script>
+</body>
+</html>
